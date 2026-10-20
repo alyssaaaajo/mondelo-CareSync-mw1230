@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareSync | Healthcare Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="shell hero-inner">
+      <div class="logo"><span class="logo-icon">✚</span><div><h1>CareSync</h1><p>Healthcare Management System</p></div></div>
+      <span class="hero-label">Management Dashboard</span>
+    </div>
+  </header>
+  <div class="topnav"><nav class="shell tabs" aria-label="Main navigation">
+    <button type="button" class="tab active" data-tab="patients">Patients</button>
+    <button type="button" class="tab" data-tab="doctors">Doctors</button>
+    <button type="button" class="tab" data-tab="appointments">Appointments</button>
+  </nav></div>
+  <main class="shell">
+    <section class="stats" aria-label="Overview">
+      <div class="stat"><span>Registered patients</span><strong id="patientCount">—</strong></div>
+      <div class="stat"><span>Available doctors</span><strong id="doctorCount">—</strong></div>
+      <div class="stat"><span>Total appointments</span><strong id="appointmentCount">—</strong></div>
+    </section>
+    <div id="notification" class="notice" role="status" aria-live="polite" hidden></div>
+
+    <section class="page active" id="patients" aria-labelledby="patientsTitle">
+      <div class="page-heading"><div><h2 id="patientsTitle">Patient Management</h2><p>Store and manage patient records.</p></div></div>
+      <div class="card"><h3 id="patientFormTitle">Add New Patient</h3>
+        <form id="patientForm" class="form-grid">
+          <label>Patient name<input name="name" maxlength="100" placeholder="e.g. Maria Santos" required></label>
+          <label>Age<input name="age" type="number" min="0" max="130" placeholder="e.g. 24" required></label>
+          <label>Gender<select name="gender" required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+          <label>Contact number<input name="contact" maxlength="30" placeholder="e.g. 09123456789" required></label>
+          <label class="full">Address<input name="address" maxlength="255" placeholder="Enter address (optional)"></label>
+          <div class="form-actions full"><button class="btn primary" id="patientSubmit" type="submit">Add Patient</button><button class="btn muted cancel" type="button" data-cancel="patients" hidden>Cancel Edit</button></div>
+        </form>
+      </div>
+      <div class="card"><div class="table-heading"><h3>Patient Records</h3><button class="btn outline" data-refresh="patients">↻ Refresh</button></div><div class="table-scroll"><table><thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Contact</th><th>Address</th><th>Actions</th></tr></thead><tbody id="patientsBody"></tbody></table></div></div>
+    </section>
+
+    <section class="page" id="doctors" aria-labelledby="doctorsTitle" hidden>
+      <div class="page-heading"><div><h2 id="doctorsTitle">Doctor Management</h2><p>Keep track of medical staff and specialties.</p></div></div>
+      <div class="card"><h3 id="doctorFormTitle">Add New Doctor</h3>
+        <form id="doctorForm" class="form-grid">
+          <label>Doctor name<input name="name" maxlength="100" placeholder="e.g. Dr. Jane Cruz" required></label>
+          <label>Specialization<input name="specialization" maxlength="100" placeholder="e.g. Pediatrics" required></label>
+          <label class="full">Contact number<input name="contact" maxlength="30" placeholder="Enter contact number" required></label>
+          <div class="form-actions full"><button class="btn primary" id="doctorSubmit" type="submit">Add Doctor</button><button class="btn muted cancel" type="button" data-cancel="doctors" hidden>Cancel Edit</button></div>
+        </form>
+      </div>
+      <div class="card"><div class="table-heading"><h3>Doctor Directory</h3><button class="btn outline" data-refresh="doctors">↻ Refresh</button></div><div class="table-scroll"><table><thead><tr><th>ID</th><th>Name</th><th>Specialization</th><th>Contact</th><th>Actions</th></tr></thead><tbody id="doctorsBody"></tbody></table></div></div>
+    </section>
+
+    <section class="page" id="appointments" aria-labelledby="appointmentsTitle" hidden>
+      <div class="page-heading"><div><h2 id="appointmentsTitle">Appointment Management</h2><p>Schedule and manage clinic visits.</p></div></div>
+      <div class="card"><h3 id="appointmentFormTitle">Schedule New Appointment</h3>
+        <form id="appointmentForm" class="form-grid">
+          <label>Patient<select name="patient_id" id="appointmentPatient" required><option value="">Select patient</option></select></label>
+          <label>Doctor<select name="doctor_id" id="appointmentDoctor" required><option value="">Select doctor</option></select></label>
+          <label>Appointment date<input name="appointment_date" type="date" required></label>
+          <label>Appointment time<input name="appointment_time" type="time" required></label>
+          <label>Status<select name="status" required><option>Scheduled</option><option>Completed</option><option>Cancelled</option></select></label>
+          <label>Reason<input name="reason" maxlength="255" placeholder="e.g. Annual checkup (optional)"></label>
+          <div class="form-actions full"><button class="btn primary" id="appointmentSubmit" type="submit">Schedule Appointment</button><button class="btn muted cancel" type="button" data-cancel="appointments" hidden>Cancel Edit</button></div>
+        </form>
+        <p class="help">Add at least one patient and one doctor before scheduling an appointment.</p>
+      </div>
+      <div class="card"><div class="table-heading"><h3>Appointment Records</h3><button class="btn outline" data-refresh="appointments">↻ Refresh</button></div><div class="table-scroll"><table><thead><tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody id="appointmentsBody"></tbody></table></div></div>
+    </section>
+  </main>
+  <footer>CareSync • Local clinic administration demo</footer>
+</body>
+</html>
